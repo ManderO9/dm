@@ -1,0 +1,218 @@
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-Thin.ttf') format('truetype');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+}
+
+
+@font-face {
+    font-family: 'inter';
+    src: url('/fonts/Inter-Black.ttf') format('truetype');
+    font-weight: 900;
+}
+
+
+* {
+    font-family: 'inter', sans-serif;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/background.png');
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    background: white;
+    margin-right: 224px;
+    margin-left: 224px;
+    margin-top: 64px;
+    margin-bottom: 64px;
+    padding: 48px;
+    padding-right: 0;
+    border-radius: 8px;
+    transition: margin 300ms;
+}
+
+.main-header {
+    margin-bottom: 24px;
+}
+
+    .main-header > span:first-child {
+        font-size: x-large;
+        font-weight: 600;
+    }
+
+    .main-header > span:last-child {
+        font-size: medium;
+        margin-top: 4px;
+    }
+
+
+.gray-text {
+    color: #707070;
+}
+
+.prediction-button-container {
+    vertical-align: central;
+}
+
+    .prediction-button-container > span {
+        background-image: linear-gradient(to bottom right, #53cce7, #d886ff);
+        opacity: 0.8;
+        padding: 2px;
+        width: calc(100% - 48px);
+        display: inline-block;
+        margin-top: 36px;
+        border-radius: 6px;
+    }
+
+        .prediction-button-container > span > button {
+            background: white;
+            padding: 4px 4px;
+            width: 100%;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 100ms ease;
+        }
+
+            .prediction-button-container > span > button:hover,
+            .prediction-button-container > span > button:focus {
+                outline: none;
+                background: #ffffff00;
+                color: white;
+            }
+
+.fields-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+label {
+    margin-top: 16px;
+    margin-right: 48px;
+}
+
+    label > div {
+        font-size: small;
+    }
+
+    label > input {
+        color: #707090e4;
+        width: calc(100% - 12px);
+        padding-left: 8px;
+        margin-top: 4px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-right: 4px;
+        border: 1px solid #a0a0a044;
+        border-radius: 2px;
+    }
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.animate-fields {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 300ms;
+}
+
+    .animate-fields > .fields-container {
+        overflow: hidden;
+    }
+
+.hidden {
+    grid-template-rows: 0fr;
+}
+
+.offsetted {
+    margin-top: 96px;
+}
+
+.prediction-container {
+    opacity: 0;
+    transition: opacity 200ms;
+
+    margin-top:64px;
+    text-align:center;
+    padding:0 96px;
+}
+.prediction-container>.prediction {
+    font-size:x-large;
+    font-weight:700;
+}
+.visible {
+    opacity: 1;
+}
+.container{
+    min-height:260px;
+}
+
+/*.prediction-fields {
+    position: relative;
+}*/
+    
+
+    .prediction-fields > .prediction-container {
+        position: absolute;
+        margin-left:5%;
+    }
+
