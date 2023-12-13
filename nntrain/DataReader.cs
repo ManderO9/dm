@@ -15,7 +15,7 @@ public class DataReader
     }
 
 
-    public float[] EncodeTarget(string target) => target switch
+    public static float[] EncodeTarget(string target) => target switch
     {
         "Conservative Spenders" => new float[] { 1, 0, 0 },
         "Balanced Spenders" => new float[] { 0, 1, 0 },
@@ -23,7 +23,7 @@ public class DataReader
         _ => throw new Exception()
     };
 
-    public string DecodeTarget(float[] encoded)
+    public static string DecodeTarget(float[] encoded)
     {
         var item1 = encoded[0];// "Conservative Spenders"
         var item2 = encoded[1];// "Balanced Spenders"
@@ -46,6 +46,14 @@ public class DataReader
 
         var target = columns.FirstOrDefault(x => x.label == "Cluster");
         columns.Remove(target);
+
+
+        //Console.WriteLine("\"label\": \"Index\" \"Min\" \"Max\"");
+
+        //foreach(var col in columns)
+        //{
+        //    Console.WriteLine($"{col.label}: {columns.IndexOf(col)} {col.data.Select(float.Parse).Min()} {col.data.Select(float.Parse).Max()}");
+        //}
 
 
         var inputs = new float[columns.First().data.Count][];

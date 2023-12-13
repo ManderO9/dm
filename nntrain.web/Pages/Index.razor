@@ -1,7 +1,92 @@
 ﻿@page "/index.html"
+@using nntrain;
 
 <PageTitle>predictions</PageTitle>
 
+@code {
+
+    public class FieldProperty
+    {
+        public FieldProperty(int index, string name, float? initialValue, float min, float max)
+        {
+            Index = index;
+            Name = name;
+            Value = initialValue;
+            MinValue = min;
+            MaxValue = max;
+        }
+
+        public int Index { get; set; }
+        public float? Value { get; set; }
+        public string Name { get; set; }
+        public float MinValue { get; set; }
+        public float MaxValue { get; set; }
+        public float NormalizedValue() => ((Value ?? MinValue) - MinValue) / (MaxValue - MinValue);
+    }
+
+    public float[] PredictionInput = new float[17];
+
+    public List<FieldProperty> Fields = new()
+    {
+        new(0, "Account Balance", null, 0.0f, 19043.139f),
+        new(1, "Balance Update Frequency", null, 0.0f, 1.0f),
+        new(2, "Total Purchases", null, 0.0f, 49039.57f),
+        new(3, "One-time Purchase Amount", null, 0.0f, 40761.25f),
+        new(4, "Installment Purchase Amount", null, 0.0f, 22500.0f),
+        new(5, "Cash Advance Amount", null, 0.0f, 47137.21f),
+        new(6, "Purchase Frequency", null, 0.0f, 1.0f),
+        new(7, "One-time Purchase Frequency", null, 0.0f, 1.0f),
+        new(8, "Installment Purchase Frequency", null, 0.0f, 1.0f),
+        new(9, "Cash Advance Frequency", null, 0.0f, 1.5f),
+        new(10, "Cash Advance Transactions", null, 0.0f, 123.0f),
+        new(11, "Purchase Transactions", null, 0.0f, 358.0f),
+        new(12, "Credit Limit", null, 5.0f, 30000.0f),
+        new(13, "Total Payments", null, 0.0f, 50721.484f),
+        new(14, "Minimum Payments", null, 0.019163f, 76406.21f),
+        new(15, "Full Payment Percentage", null, 0.0f, 1.0f),
+        new(16, "Customer Tenure", null, 6.0f, 12.0f),
+    };
+
+    public void ForwardInputs()
+    {
+
+        for(int i = 0; i < Fields.Count; i++)
+        {
+            PredictionInput[i] = Fields.First(x => x.Index == i).NormalizedValue();
+        }
+    }
 
 
-<a>hello world</a>
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var result = DataReader.DecodeTarget(new float[3]);
+
+    }
+}
+
+<div class="container">
+    <div class="main-header">
+        <span>Expenses Prediction</span><br />
+        <span class="gray-text">Fill in your information in the form below then click predict</span>
+    </div>
+
+    <div class="fields-container">
+
+        @foreach(var field in Fields)
+        {
+            <label>
+                <div>@field.Name</div>
+                <input placeholder="(@field.MinValue.ToString("F2") - @field.MaxValue.ToString("F2"))" @bind="field.Value" type="number" min="@field.MinValue" max="@field.MaxValue" />
+            </label>
+        }
+        <div class="prediction-button-container">
+            <span>
+                <button class="gray-text" @onclick="ForwardInputs">Predict</button>
+            </span>
+        </div>
+
+    </div>
+
+</div>
+

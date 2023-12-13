@@ -27,3 +27,11 @@ await builder.Build().RunAsync();
 //        < td > @forecast.Summary </ td >
 //    </ tr >
 //}
+
+
+
+// Load the network from github using an http request
+// make sure the values are in correct order
+// normalize the values that you will read from the user
+// pass the values through the network
+// display the result
