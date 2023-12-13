@@ -1,10 +1,14 @@
 ﻿@page "/index.html"
+@using NeuralNetworkNET.APIs.Enums;
+@using NeuralNetworkNET.APIs.Interfaces;
+@using NeuralNetworkNET.APIs;
 @using nntrain;
+@using nntrain.core;
+@inject HttpClient mHttpClient;
 
 <PageTitle>predictions</PageTitle>
 
 @code {
-
     public class FieldProperty
     {
         public FieldProperty(int index, string name, float? initialValue, float min, float max)
@@ -23,6 +27,8 @@
         public float MaxValue { get; set; }
         public float NormalizedValue() => ((Value ?? MinValue) - MinValue) / (MaxValue - MinValue);
     }
+
+    INeuralNetwork? mNeuralNetwork;
 
     public float[] PredictionInput = new float[17];
 
@@ -49,43 +55,84 @@
 
     public void ForwardInputs()
     {
-
         for(int i = 0; i < Fields.Count; i++)
-        {
             PredictionInput[i] = Fields.First(x => x.Index == i).NormalizedValue();
-        }
-    }
 
+        var result = mNeuralNetwork!.Forward(PredictionInput);
+        var label = BL.DecodeTarget(result);
+
+        DisplayPrediction(label);
+    }
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        var result = DataReader.DecodeTarget(new float[3]);
+        var networkUrl = "/network.nnet";
 
+        var networkFile = await mHttpClient.GetStreamAsync(networkUrl);
+        mNeuralNetwork = NetworkLoader.TryLoad(networkFile, ExecutionModePreference.Cpu);
     }
+
+    private void DisplayPrediction(string prediction)
+    {
+        FieldsClasses = "hidden";
+        Prediction = prediction.Remove(prediction.Length - 1);
+        PredictionDisplayed = true;
+        ContainerClasses = "offsetted";
+    }
+    private void HidePrediction()
+    {
+        Console.WriteLine("Ran the function");
+
+        FieldsClasses = "";
+        ContainerClasses = "";
+        PredictionDisplayed = false;
+    }
+
+    private string FieldsClasses = "";
+    private string ContainerClasses = "";
+    private bool PredictionDisplayed = false;
+    private string Prediction = "None";
 }
 
-<div class="container">
+<div class="container @ContainerClasses">
     <div class="main-header">
         <span>Expenses Prediction</span><br />
         <span class="gray-text">Fill in your information in the form below then click predict</span>
     </div>
 
-    <div class="fields-container">
 
-        @foreach(var field in Fields)
-        {
-            <label>
-                <div>@field.Name</div>
-                <input placeholder="(@field.MinValue.ToString("F2") - @field.MaxValue.ToString("F2"))" @bind="field.Value" type="number" min="@field.MinValue" max="@field.MaxValue" />
-            </label>
-        }
-        <div class="prediction-button-container">
-            <span>
-                <button class="gray-text" @onclick="ForwardInputs">Predict</button>
-            </span>
+    <div class="prediction-fields">
+
+        <div class="prediction-container @(PredictionDisplayed ? "visible" : "")">
+            <div class="prediction">@Prediction</div>
+            <div class="message gray-text">Your result shows that you are @(Prediction.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? "an" : "a") @Prediction !</div>
+
+
+            <div class="prediction-button-container">
+                <span>
+                    <button class="gray-text" @onclick="HidePrediction">Try again</button>
+                </span>
+            </div>
         </div>
 
+        <div class="animate-fields @(FieldsClasses)">
+
+            <div class="fields-container">
+                @foreach(var field in Fields)
+                {
+                    <label>
+                        <div>@field.Name</div>
+                        <input placeholder="(@field.MinValue.ToString("F2") - @field.MaxValue.ToString("F2"))" @bind="field.Value" type="number" min="@field.MinValue" max="@field.MaxValue" />
+                    </label>
+                }
+                <div class="prediction-button-container">
+                    <span>
+                        <button class="gray-text" @onclick="ForwardInputs">Predict</button>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

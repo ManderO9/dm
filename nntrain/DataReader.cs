@@ -15,7 +15,7 @@ public class DataReader
     }
 
 
-    public static float[] EncodeTarget(string target) => target switch
+    public float[] EncodeTarget(string target) => target switch
     {
         "Conservative Spenders" => new float[] { 1, 0, 0 },
         "Balanced Spenders" => new float[] { 0, 1, 0 },
@@ -23,7 +23,7 @@ public class DataReader
         _ => throw new Exception()
     };
 
-    public static string DecodeTarget(float[] encoded)
+    public string DecodeTarget(float[] encoded)
     {
         var item1 = encoded[0];// "Conservative Spenders"
         var item2 = encoded[1];// "Balanced Spenders"

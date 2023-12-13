@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nntrain", "nntrain\nntrain.csproj", "{F269F429-F42D-45A8-97D9-BD66C771DE67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nntrain.web", "nntrain.web\nntrain.web.csproj", "{685237DB-5E6B-4D48-AC36-0D771AE63ADA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nntrain.web", "nntrain.web\nntrain.web.csproj", "{685237DB-5E6B-4D48-AC36-0D771AE63ADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nntrain.core", "nntrain.core\nntrain.core.csproj", "{6FAE298A-8467-46A9-AD05-C797E6115599}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{685237DB-5E6B-4D48-AC36-0D771AE63ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{685237DB-5E6B-4D48-AC36-0D771AE63ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{685237DB-5E6B-4D48-AC36-0D771AE63ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FAE298A-8467-46A9-AD05-C797E6115599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FAE298A-8467-46A9-AD05-C797E6115599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FAE298A-8467-46A9-AD05-C797E6115599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FAE298A-8467-46A9-AD05-C797E6115599}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

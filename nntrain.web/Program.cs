@@ -18,18 +18,6 @@ await builder.Build().RunAsync();
 //}
 
 
-//@foreach(var forecast in forecasts)
-//{
-//    < tr >
-//        < td > @forecast.Date.ToShortDateString() </ td >
-//        < td > @forecast.TemperatureC </ td >
-//        < td > @forecast.TemperatureF </ td >
-//        < td > @forecast.Summary </ td >
-//    </ tr >
-//}
-
-
-
 // Load the network from github using an http request
 // make sure the values are in correct order
 // normalize the values that you will read from the user

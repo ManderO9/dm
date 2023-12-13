@@ -78,6 +78,7 @@ body {
     padding: 48px;
     padding-right: 0;
     border-radius: 8px;
+    transition: margin 300ms;
 }
 
 .main-header {
@@ -125,7 +126,7 @@ body {
 
             .prediction-button-container > span > button:hover,
             .prediction-button-container > span > button:focus {
-                outline:none;
+                outline: none;
                 background: #ffffff00;
                 color: white;
             }
@@ -150,8 +151,8 @@ label {
         width: calc(100% - 12px);
         padding-left: 8px;
         margin-top: 4px;
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding-top: 6px;
+        padding-bottom: 6px;
         padding-right: 4px;
         border: 1px solid #a0a0a044;
         border-radius: 2px;
@@ -167,3 +168,51 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.animate-fields {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 300ms;
+}
+
+    .animate-fields > .fields-container {
+        overflow: hidden;
+    }
+
+.hidden {
+    grid-template-rows: 0fr;
+}
+
+.offsetted {
+    margin-top: 96px;
+}
+
+.prediction-container {
+    opacity: 0;
+    transition: opacity 200ms;
+
+    margin-top:64px;
+    text-align:center;
+    padding:0 96px;
+}
+.prediction-container>.prediction {
+    font-size:x-large;
+    font-weight:700;
+}
+.visible {
+    opacity: 1;
+}
+.container{
+    min-height:260px;
+}
+
+/*.prediction-fields {
+    position: relative;
+}*/
+    
+
+    .prediction-fields > .prediction-container {
+        position: absolute;
+        margin-left:5%;
+    }
+
