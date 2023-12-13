@@ -67,7 +67,7 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        var networkUrl = "/network.nnet";
+        var networkUrl = "https://mandero9.github.io/dm/network.nnet";
 
         var networkFile = await mHttpClient.GetStreamAsync(networkUrl);
         mNeuralNetwork = NetworkLoader.TryLoad(networkFile, ExecutionModePreference.Cpu);
