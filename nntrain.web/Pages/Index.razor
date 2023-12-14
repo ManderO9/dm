@@ -71,6 +71,7 @@
 
         var networkFile = await mHttpClient.GetStreamAsync(networkUrl);
         mNeuralNetwork = NetworkLoader.TryLoad(networkFile, ExecutionModePreference.Cpu);
+
     }
 
     private void DisplayPrediction(string prediction)
@@ -102,18 +103,20 @@
 
     <div class="prediction-fields">
 
-        <div class="prediction-container @(PredictionDisplayed ? "visible" : "")">
-            <div class="prediction">@Prediction</div>
-            <div class="message gray-text">Your result shows that you are @(Prediction.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? "an" : "a") @Prediction !</div>
+        <div class="predictions-aligner">
+            <div class="prediction-container @(PredictionDisplayed ? "visible" : "")">
+                <div class="prediction">@Prediction</div>
+                <div class="message gray-text">Your result shows that you are @(Prediction.StartsWith("a", StringComparison.OrdinalIgnoreCase) ? "an" : "a") @Prediction !</div>
 
 
-            <div class="prediction-button-container">
-                <span>
-                    <button class="gray-text" @onclick="HidePrediction">Try again</button>
-                </span>
+                <div class="prediction-button-container">
+                    <span>
+                        <button class="gray-text" @onclick="HidePrediction">Try again</button>
+                    </span>
+                </div>
             </div>
-        </div>
 
+        </div>
         <div class="animate-fields @(FieldsClasses)">
 
             <div class="fields-container">
